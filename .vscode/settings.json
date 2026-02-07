@@ -1,0 +1,8 @@
+{
+  "files.autoGuessEncoding": true,
+  "files.encoding": "utf8",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
+}

@@ -1,0 +1,42 @@
+# Build and output directories
+/build/
+/bin/
+
+# Visual Studio / MSVC files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+.vs/
+ipch/
+*.ilk
+*.pdb
+*.idb
+*.exp
+*.lib
+*.obj
+*.tlog
+*.lastbuildstate
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+CTestTestfile.cmake
+_Deps/
+
+# Build configurations
+Debug/
+Release/
+RelWithDebInfo/
+MinSizeRel/
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Optional: uncomment if you don't want to track data files
+# /data/*.pcd
+# /data/*.ply

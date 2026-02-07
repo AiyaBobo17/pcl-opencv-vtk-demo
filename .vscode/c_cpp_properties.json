@@ -1,0 +1,62 @@
+{
+  // "configurations" 是一个数组，允许你为不同平台或构建环境定义多套 IntelliSense 配置。
+  // 每个对象代表一种配置（例如 Win32、Win64、Linux 等）。
+  "configurations": [
+    {
+      // 配置名称，在 VS Code 底部状态栏可切换。这里叫 "Win64"，表示这是针对 64 位 Windows 的配置。
+      "name": "Win64",
+
+      // includePath：告诉 IntelliSense 在哪些路径下查找头文件（#include 的内容）。
+      // 支持通配符 ** 表示递归包含子目录。
+      "includePath": [
+        // 当前工作区 src 目录及其所有子目录下的头文件
+        "${workspaceFolder}/src/**",
+        "D:/OpenSource/OPENCV490/opencv/build/include**",  // OpenCV 头文件路径
+        "D:/OpenSource/PCL1151/include/pcl-1.15**",        // PCL 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/Eigen3/include/eigen3**",  // Eigen 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/Boost/include/boost-1_87**",  // Boost 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/FLANN/include**",  // FLANN 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/Qhull/include**",  // Qhull 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/Vtk/include/vtk-9.4**",  // VTK 头文件路径
+
+        // MSVC 编译器的标准 C++ 头文件路径[固定]
+        "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/include",
+        // Windows SDK 的 UCRT（Universal C Runtime）头文件
+        "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0/ucrt",
+        // Windows API 的 User-Mode（um）头文件（如 windows.h）
+        "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0/um",
+        // Windows 共享头文件（如 basetsd.h, windef.h 等）
+        "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0/shared",
+        // Windows Runtime (WinRT) C++/WinRT 相关头文件（如果你用 C++/WinRT 或 UWP 会需要）
+        "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0/winrt"
+      ],
+
+      // defines：预处理器宏定义，等效于在代码开头写 #define _DEBUG 等。
+      // 这些宏会影响 IntelliSense 的代码高亮和条件编译判断。
+      "defines": [
+        "_DEBUG",     // 启用调试模式（通常与 #ifdef _DEBUG 配合）
+        "UNICODE",    // 启用宽字符支持（Windows API 使用 wchar_t）
+        "_UNICODE"    // 同上，确保 TCHAR 映射为 wchar_t
+      ],
+
+      // compilerPath：指定实际使用的编译器路径（cl.exe）。
+      // VS Code 会据此推断默认的系统头文件路径和内置宏。
+      // 注意：Hostx64/x64 表示在 64 位主机上编译 64 位目标程序。
+      "compilerPath": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe",
+
+      // C 语言标准版本（用于 C 文件的 IntelliSense）
+      "cStandard": "c17",   // 即 ISO/IEC 9899:2018（也称 C18）
+
+      // C++ 语言标准版本（用于 C++ 文件的 IntelliSense）
+      "cppStandard": "c++17", // C++17 标准
+
+      // IntelliSense 引擎模式：指定使用哪种编译器语义解析。
+      // "msvc-x64" 表示使用 MSVC 语法、64 位目标平台。
+      // 其他选项如 "gcc-x64"、"clang-x64" 等适用于不同工具链。
+      "intelliSenseMode": "msvc-x64"
+    }
+  ],
+
+  // 配置文件版本号，由 VS Code C/C++ 扩展使用，一般不需要修改。
+  "version": 4
+}
