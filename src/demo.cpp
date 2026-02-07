@@ -19,6 +19,9 @@ static void myfunc()
     // 两数求差
     int dif = diff(y, x);
     std::cout << "The diff of " << y << " and " << x << " is " << dif << std::endl;
+
+    // 打印一条消息
+    std::cout << "hello, this is myfunc()!" << std::endl;
 }
 
 // opncv演示函数
