@@ -96,7 +96,7 @@ int main()
     std::cout << greeting << std::endl;
 
     // 调用演示函数
-    myfunc();
+    myfunc();// 实现自定义函数的调用
 
     // 调用 OpenCV 演示函数
     opencv_demo();
