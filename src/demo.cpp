@@ -1,6 +1,7 @@
 #include <iostream>
 #include "sum.h"
 #include "diff.h"
+#include "edge.h"
 #include <opencv2/opencv.hpp>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
@@ -104,11 +105,14 @@ int main()
     // 调用 OpenCV 演示函数
     opencv_demo();
 
+    // 调用 OpenCV 边缘检测演示
+    edge_demo();
+
     // 调用 PCL 演示函数
     pcl_demo();
 
-#ifdef MY_TSET_SHOW_PRINTF
-    std::cout << "MY_TSET_SHOW_PRINT is defined." << std::endl;
+#ifdef MY_TEST_SHOW_PRINTF
+    std::cout << "MY_TEST_SHOW_PRINTF is defined." << std::endl;
 #endif
 
     return 0;

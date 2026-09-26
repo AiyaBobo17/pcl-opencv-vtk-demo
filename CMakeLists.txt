@@ -46,6 +46,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 # ==============================
 # 编译选项
 # ==============================
+# 配置相关（/Zi、/O2）一律交给生成器表达式按当前配置求值，不要写 if(CMAKE_BUILD_TYPE ...)：
+# 在 VS 等多配置生成器下 CMAKE_BUILD_TYPE 是空的，那种判断会静默失效。
 target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:/Zi>
     $<$<CONFIG:Release>:/O2>
@@ -55,12 +57,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     /D_UNICODE
 )
 
-#仅在 Debug 模式定义调试宏
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE
-    MY_TSET_SHOW_PRINTF
-    )
-endif()
+# 仅在 Debug 模式定义调试宏（同样用生成器表达式，保证多配置生成器下也生效）
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<CONFIG:Debug>:MY_TEST_SHOW_PRINTF>
+)
 
 # 链接选项
 target_link_options(${PROJECT_NAME} PRIVATE
@@ -71,6 +71,19 @@ target_link_options(${PROJECT_NAME} PRIVATE
 # ==============================
 # 库后缀设置（Debug vs Release）
 # ==============================
+# 说明：这一段是配置期逻辑，无法使用生成器表达式——库名必须在 configure 阶段
+# 就写死进链接行。这里读 CMAKE_BUILD_TYPE 属于该变量的合法用途（挑选链接哪个库），
+# 而不是拿它控制编译选项。单配置生成器（Ninja / Makefile）下它一定有值；
+# 下面这段兜底是为了让 VS 这类多配置生成器也能正常 configure。
+if(NOT CMAKE_BUILD_TYPE AND CMAKE_CONFIGURATION_TYPES)
+    if("Debug" IN_LIST CMAKE_CONFIGURATION_TYPES)
+        set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type" FORCE)
+    else()
+        set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
+    endif()
+    message(STATUS "CMAKE_BUILD_TYPE 未设置，已自动推断为 ${CMAKE_BUILD_TYPE}")
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(OPENCV_LIB_SUFFIX "d")
     set(PCL_LIB_SUFFIX "d")
@@ -80,6 +93,7 @@ else()
     set(PCL_LIB_SUFFIX "")
     set(VTK_LIB_SUFFIX "-9.4")
 endif()
+message(STATUS "构建类型: ${CMAKE_BUILD_TYPE}（OpenCV 后缀 '${OPENCV_LIB_SUFFIX}'，VTK 后缀 '${VTK_LIB_SUFFIX}'）")
 
 # ==============================
 # OpenCV 库（完整路径）
@@ -144,9 +158,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 # ==============================
 # 输出目录
 # ==============================
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-)
+# 四种配置统一输出到 bin/
+foreach(cfg DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY_${cfg} "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    )
+endforeach()
