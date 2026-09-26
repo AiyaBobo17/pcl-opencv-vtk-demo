@@ -1,0 +1,59 @@
+{
+  // 调试配置：用微软 C/C++ 扩展自带的 cppvsdbg 调试器（MSVC 原生，无需额外安装）。
+  //
+  // workingDirectory 必须是 ${workspaceFolder}/bin ——
+  // 因为 demo.cpp / edge.cpp 用相对路径 "../data/17.jpg" 加载图片，
+  // 从 bin/ 启动才会解析成 工程根目录/data/17.jpg。
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "调试 HelloDemo (Debug)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/HelloDemo.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "D:/OpenSource/OPENCV490/opencv/build/x64/vc16/bin;D:/OpenSource/PCL1151/bin;D:/OpenSource/PCL1151/3rdParty/VTK/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "调试 HelloDemo (Release)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/HelloDemo.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "D:/OpenSource/OPENCV490/opencv/build/x64/vc16/bin;D:/OpenSource/PCL1151/bin;D:/OpenSource/PCL1151/3rdParty/VTK/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "运行 HelloDemo（不调试）",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/HelloDemo.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "D:/OpenSource/OPENCV490/opencv/build/x64/vc16/bin;D:/OpenSource/PCL1151/bin;D:/OpenSource/PCL1151/3rdParty/VTK/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal",
+      "noDebug": true
+    }
+  ]
+}

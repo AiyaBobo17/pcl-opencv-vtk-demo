@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // VS Code 里请直接用 CMake Tools：
+      //   Ctrl+Shift+P -> CMake: Select a Kit -> 选 Visual Studio ... amd64
+      //   然后 CMake: Configure / F7 构建 / F5 调试
+      //
+      // 下面这个 task 只用于生成 Visual Studio 解决方案（在 VS 里断点调试用），
+      // 日常开发不需要。
+      "label": "生成 Visual Studio 解决方案 (Debug)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", ".",
+        "-B", "build/vs",
+        "-G", "Visual Studio 18 2026",
+        "-A", "x64",
+        "-DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$msCompile"],
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "生成 Visual Studio 解决方案 (Release)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", ".",
+        "-B", "build/vs-release",
+        "-G", "Visual Studio 18 2026",
+        "-A", "x64",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$msCompile"],
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "panel": "shared"
+      }
+    }
+  ]
+}

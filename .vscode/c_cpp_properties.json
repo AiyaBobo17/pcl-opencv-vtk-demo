@@ -6,6 +6,12 @@
       // 配置名称，在 VS Code 底部状态栏可切换。这里叫 "Win64"，表示这是针对 64 位 Windows 的配置。
       "name": "Win64",
 
+      // 首选数据来源：CMake 导出的编译数据库（比下面手工维护的 includePath 准确得多，
+      // 且会自动带上 /arch:AVX2、/utf-8 等真实编译参数）。
+      // 由 CMakePresets 之外的 Kit 构建（Ninja + CMAKE_EXPORT_COMPILE_COMMANDS=ON）生成。
+      // ⚠️ 换用 Release 配置时，请把下面这段的 Debug 改成 Release。
+      "compileCommands": "${workspaceFolder}/build/Debug/compile_commands.json",
+
       // includePath：告诉 IntelliSense 在哪些路径下查找头文件（#include 的内容）。
       // 支持通配符 ** 表示递归包含子目录。
       "includePath": [
@@ -17,7 +23,7 @@
         "D:/OpenSource/PCL1151/3rdParty/Boost/include/boost-1_87**",  // Boost 头文件路径
         "D:/OpenSource/PCL1151/3rdParty/FLANN/include**",  // FLANN 头文件路径
         "D:/OpenSource/PCL1151/3rdParty/Qhull/include**",  // Qhull 头文件路径
-        "D:/OpenSource/PCL1151/3rdParty/Vtk/include/vtk-9.4**",  // VTK 头文件路径
+        "D:/OpenSource/PCL1151/3rdParty/VTK/include/vtk-9.4**",  // VTK 头文件路径（注意目录名是 VTK，原为 Vtk 笔误）
 
         // MSVC 编译器的标准 C++ 头文件路径[固定]
         "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/include",

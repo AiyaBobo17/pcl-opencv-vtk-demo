@@ -5,4 +5,13 @@
   "editor.insertSpaces": true,
   "files.trimTrailingWhitespace": true,
   "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
+
+  // 不使用 CMakePresets（工程里已无该文件）。
+  // 日常 Ninja 构建完全交给 Kit：Kit 会自动注入完整的 MSVC 环境
+  // （PATH / INCLUDE / LIB）。预设模式会绕过 Kit，从而无法获得这套环境——
+  // 即使预设里写死 cl.exe 绝对路径，仍会因缺 INCLUDE/LIB 在 ABI 检测阶段失败。
+  "cmake.useCMakePresets": "auto",
+
+  // 生成器固定为 Ninja（单配置）。防止被 CMake Tools 自动挑成 Visual Studio 生成器。
+  "cmake.generator": "Ninja"
 }
