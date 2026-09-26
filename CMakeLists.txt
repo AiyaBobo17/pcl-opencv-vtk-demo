@@ -30,6 +30,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${SRC_DIR}
     ${SRC_DIR}/sum
     ${SRC_DIR}/diff
+    ${SRC_DIR}/edge
 
     # PCL 及其依赖
     ${PCL_ROOT}/include/pcl-1.15
